@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/exploded-aar/Scopes/scopesapi/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="7d07fa28a78c6ab4bface8f0028441accefa5118">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/classes-cc617cdb6ce4d3fa09d83d85035a577d1fe75fc1.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="81241ff7078ef14f42ea2a8995fa09c096256e6b">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/javawriter-2.5.0-42c5f0990cce892b923750d38a5485d914875157.jar" />
+    </item>
+
+</items>
