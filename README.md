@@ -169,8 +169,8 @@ Add a parameter to `@Scope` that allows passing an `Classes[]` to be injected. R
 ###Installation
 Just add the dependency to your `build.gradle`:
 ``` gradle
-compile 'me.emmano:scopes:0.1.1'
-apt 'me.emmano:scopes-compiler:0.1.0@jar'
+compile 'me.emmano:scopes:0.1.2'
+apt 'me.emmano:scopes-compiler:0.1.2@jar'
 ```
 `Scopes` requires the `apt` plugin. You can add it easily by adding this to your `build.gradle`:
 ```gradle
@@ -182,7 +182,18 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
+
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 ```
+
+Lastly, add this inside `android{}` in your `build.gradle`:
+```gradle
+packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+}
+```
+For more help setting up `Scopes` you can look at the `app` sample module.
 
 License
 -------

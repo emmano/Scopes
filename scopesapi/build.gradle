@@ -1,11 +1,10 @@
-def VERSION = '0.1.1'
+def VERSION = '0.1.2'
 buildscript {
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
     }
 }
@@ -14,12 +13,12 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 repositories {
-        mavenCentral()
+    mavenCentral()
 }
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 11
@@ -32,17 +31,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
 
     sourceSets {
         main.java.srcDirs += ['src/main/api']
     }
-
 
 }
 
