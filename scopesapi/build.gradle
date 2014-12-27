@@ -103,7 +103,7 @@ bintray {
         issueTrackerUrl = 'https://github.com/emmano/Scopes/issues'
         vcsUrl = 'https://github.com/emmano/Scopes.git'
         licenses = ['MIT']
-        labels = ['Android', 'ListView']
+        labels = ['Android', 'Dagger', 'Retrofit']
         publicDownloadNumbers = true
 
         version {
