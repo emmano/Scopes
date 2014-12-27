@@ -11,6 +11,7 @@ It allows to separate portions of your `Application` in logical "flows". It gene
 ###What the hell are you talking about?!
 Here is an example. Let's say that your `Application` has a login/signup flow (i.e. a screen with a login button, a another one with an "Enter username and password", etc). It is really likely that `Activities` that are part of this flow will have common dependencies (i.e. an `AuthenticatorService.java`,`LoginErrorDialog.java`, etc). Scopes allows you to define a `BaseActivity` that contains all these shared dependencies.
 
+
 ###Ok, got it, how do I use it?
 It all starts by defining a class that is Annotated with `@Scope`; it does not need to be an `Activity`.
 
@@ -164,6 +165,24 @@ Create an Annotation that that can be added to a method in the `Application` `Cl
 Tons of refactoring. Kittens are currently dying due to some code on the `ScopeProcessor` class.
 
 Add a parameter to `@Scope` that allows passing an `Classes[]` to be injected. Right now, only `Retrofit` services can be injected. You can currently add these dependencies to the your version of `ActivityModule`, add the corresponding `@Injects` and extends your version of `MainActivity` to get regular `Objects` other than `retrofitServices` injected. It is hacky and nasty, I know.
+
+###Installation
+Just add the dependency to your `build.gradle`:
+``` gradle
+compile 'me.emmano:scopes:0.1.1'
+apt 'me.emmano:scopes-compiler:0.1.0@jar'
+```
+`Scopes` requires the `apt` plugin. You can add it easily by adding this to your `build.gradle`:
+```gradle
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+```
 
 License
 -------
