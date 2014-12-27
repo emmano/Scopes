@@ -145,6 +145,9 @@ Please note `addsTo`. Unfortunately, you will have to manually add the `Module` 
 
 ### TODO
 Upload an aar (that works!) to jcenter() so `Scopes` can be used by adding `compile...` to `build.gradle`
+
 Create an Annotation that that can be added to a method in the `Application` `Class` to get a reference of an `Application` `ObjectGraph` if there is one.
+
 Tons of refactoring. Kittens are currently dying due to some code on the `ScopeProcessor` class.
+
 Add a paramter to `@Scope` that allows passing an `Classes[]` to be injected. Right now, only `Retrofit` services can be injected. You can currently add these dependencies to the your version of `ActivityModule`, add the corresponding `@Injects` and extends your version of `MainActivity` to get regular `Objects` other than `retrofitServices` injected. It is hacky and nasty, I know.
