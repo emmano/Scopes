@@ -12,11 +12,11 @@ import modules.ActivityModule;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import scopes.BaseFlowActivity;
+import scopes.BaseLoginFlowActivity;
 import services.Repo;
 
 
-public class MainActivity extends BaseFlowActivity {
+public class MainActivity extends BaseLoginFlowActivity {
 
     @InjectView(R.id.text)
     protected TextView textView;

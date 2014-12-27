@@ -47,13 +47,13 @@ public class ScopesProcessor extends AbstractProcessor {
                 .getElementsAnnotatedWith(Scope.class);
         Set<String> toInjectOnBaseClass = new HashSet<>();
         if (annotatedElements.size() > 0) {
-            while(annotatedElements.iterator().hasNext()){
-                final Element firstAnnotatedElement = annotatedElements.iterator().next();
+            for (Element annotatedElement : annotatedElements) {
+
                 String newSourceName = "";
                 final String packageName = processingEnv.getElementUtils()
-                        .getPackageOf(firstAnnotatedElement).toString();
+                        .getPackageOf(annotatedElement).toString();
 
-                final Scope scopeAnnotation = firstAnnotatedElement.getAnnotation(Scope.class);
+                final Scope scopeAnnotation = annotatedElement.getAnnotation(Scope.class);
                 final String restAdapterClassName = scopeAnnotation
                         .restAdapterModule();
                 final boolean enableButterKnife = scopeAnnotation.butterKnife();
@@ -94,7 +94,7 @@ public class ScopesProcessor extends AbstractProcessor {
                     e.printStackTrace();
                 }
             }
-            }
+        }
 
         return false;
     }
