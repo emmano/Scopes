@@ -19,6 +19,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.MirroredTypesException;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.JavaFileObject;
@@ -37,9 +38,7 @@ import retrofit.RestAdapter;
 public class ScopesProcessor extends AbstractProcessor {
 
     //TODO Refactor the world. This code is bad.
-    //TODO Support ButterKnife
     //TODO Add Annotation to support ApplicationGraph
-    //TODO expand to allow more than one @Scope
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 
@@ -54,14 +53,18 @@ public class ScopesProcessor extends AbstractProcessor {
                         .getPackageOf(annotatedElement).toString();
 
                 final Scope scopeAnnotation = annotatedElement.getAnnotation(Scope.class);
-                final String restAdapterClassName = scopeAnnotation
-                        .restAdapterModule();
+                String restAdapterClassName = "";
                 final boolean enableButterKnife = scopeAnnotation.butterKnife();
                 //Terrible solution; it works for now.
                 try {
                     scopeAnnotation.retrofitServices();
                 } catch (MirroredTypesException e) {
                     newSourceName = scopeAnnotation.baseActivityName();
+                    try {
+                        restAdapterClassName = scopeAnnotation.restAdapterModule().getName();
+                    } catch (MirroredTypeException ex) {
+                        restAdapterClassName = ex.getTypeMirror().toString() + ".class";
+                    }
                     for (TypeMirror typeMirror : e.getTypeMirrors()) {
                         toInjectOnBaseClass.add(typeMirror.toString());
                     }
