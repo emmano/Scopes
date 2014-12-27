@@ -14,6 +14,10 @@ public @interface Scope {
 
     String baseActivityName() default "BaseScopedActivity";
 
-    Class[] classesToInject();
+    Class[] retrofitServices();
+
+    String restAdapterModule();
+
+    boolean butterKnife() default false;
 
 }

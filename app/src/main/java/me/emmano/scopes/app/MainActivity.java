@@ -2,39 +2,56 @@ package me.emmano.scopes.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.widget.TextView;
 
-import me.emmano.scopesapi.Scope;
-import services.AuthenticatorService;
-import services.LoginService;
+import java.util.List;
 
-@Scope(classesToInject = {LoginService.class, AuthenticatorService.class})
-public class MainActivity extends Activity {
+import butterknife.InjectView;
+import modules.ActivityModule;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import scopes.BaseFlowActivity;
+import services.Repo;
+
+
+public class MainActivity extends BaseFlowActivity {
+
+    @InjectView(R.id.text)
+    protected TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        textView.setText("Eureka!");
+        githubService.starGazers(new Callback<List<Repo>>() {
+            @Override
+            public void success(List<Repo> repos, Response response) {
+                for (Repo repo : repos) {
+                    Log.e(MainActivity.class.getSimpleName(), repo.getLogIn());
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    protected Object[] getModules() {
+        return new Object[]{new ActivityModule()};
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected Activity getActivity() {
+        return this;
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_main;
     }
 }
