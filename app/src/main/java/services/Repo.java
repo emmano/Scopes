@@ -5,9 +5,9 @@ package services;
  */
 public class Repo {
 
-    private String logIn;
+    private String login;
 
     public String getLogIn() {
-        return logIn;
+        return login;
     }
 }
