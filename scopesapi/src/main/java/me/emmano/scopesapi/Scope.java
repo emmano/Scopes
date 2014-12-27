@@ -16,7 +16,7 @@ public @interface Scope {
 
     Class[] retrofitServices();
 
-    String restAdapterModule();
+    Class restAdapterModule();
 
     boolean butterKnife() default false;
 
