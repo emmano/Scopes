@@ -2,11 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/exploded-aar/Scopes/scopesapi/unspecified/classes.jar"
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.8.0/a517f29ed06be2b2879524fcd94b6e9b36e2e0b5/retrofit-1.8.0.jar"
         jumboMode="false"
         revision="21.0.2"
-        sha1="7d07fa28a78c6ab4bface8f0028441accefa5118">
-        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/classes-cc617cdb6ce4d3fa09d83d85035a577d1fe75fc1.jar" />
+        sha1="a517f29ed06be2b2879524fcd94b6e9b36e2e0b5">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/retrofit-1.8.0-befdeb10ced50e61ca571973fb2e2c93341a72dd.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.squareup.dagger/dagger-compiler/1.2.2/fa9b2f9ae597cedf2a66ef3e60662ff36bb60e57/dagger-compiler-1.2.2.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="fa9b2f9ae597cedf2a66ef3e60662ff36bb60e57">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/dagger-compiler-1.2.2-05819585422aeae853cbff7f8f561f09e61b98b2.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/gson-2.3-e3ebf0a0208515c9e8b82c55c25623cc28c524bc.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/javax.inject-1-1073ef3cb6a5b8def7b6c3b39428d2a2f0203b0c.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.squareup.dagger/dagger/1.2.2/e8f912ee19ad84958510883ea191135276b091f8/dagger-1.2.2.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="e8f912ee19ad84958510883ea191135276b091f8">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/dagger-1.2.2-9c03b126ff8a9a9fb66b56c9f945e966e4e1a629.jar" />
     </item>
     <item
         jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar"
@@ -14,6 +42,27 @@
         revision="21.0.2"
         sha1="81241ff7078ef14f42ea2a8995fa09c096256e6b">
         <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/javawriter-2.5.0-42c5f0990cce892b923750d38a5485d914875157.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/exploded-aar/Scopes/scopesapi/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="1e43fc621c4fd76242d1561024f083b3cc60d2c1">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/classes-cc617cdb6ce4d3fa09d83d85035a577d1fe75fc1.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/ed727a8d9f247e2050281cb083f1c77b09dcb5cd/guava-15.0.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="ed727a8d9f247e2050281cb083f1c77b09dcb5cd">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/guava-15.0-279cf3d13b0c7eef0f511fa91e7f341ffa8cfa09.jar" />
+    </item>
+    <item
+        jar="/Users/emmanuelortiguela/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.0.0/3a10b25b6820e19102e118711afe6a66c0bae123/butterknife-6.0.0.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="3a10b25b6820e19102e118711afe6a66c0bae123">
+        <dex dex="/Users/emmanuelortiguela/Desktop/Android/Scopes/app/build/intermediates/pre-dexed/debug/butterknife-6.0.0-2578f2c872fe6a8585cc3ca4ec0f7405295cb6e4.jar" />
     </item>
 
 </items>
