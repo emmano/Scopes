@@ -1,4 +1,4 @@
-package me.emmano.scopes.app;
+package me.emmano.scopes.app.signup;
 
 import me.emmano.scopesapi.Scope;
 import me.emmano.scopes.app.modules.RestAdapterModule;

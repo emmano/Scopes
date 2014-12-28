@@ -1,4 +1,4 @@
-package me.emmano.scopes.app;
+package me.emmano.scopes.app.login;
 
 import me.emmano.scopesapi.Scope;
 import me.emmano.scopes.app.services.GithubService;

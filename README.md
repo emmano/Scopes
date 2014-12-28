@@ -148,7 +148,7 @@ There is one last thing for you to do. `getModules()` gives you the option to ad
 package modules;
 
 import dagger.Module;
-import me.emmano.scopes.app.MainActivity;
+import me.emmano.scopes.app.login.MainActivity;
 import scopes.BaseLoginFlowActivityModule;
 
 @Module(injects = MainActivity.class, addsTo = BaseLoginFlowActivityModule.class)
