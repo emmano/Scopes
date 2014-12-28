@@ -26,6 +26,7 @@ import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 import dagger.Module;
+import dagger.ObjectGraph;
 import dagger.Provides;
 import me.emmano.scopesapi.ApplicationGraph;
 import me.emmano.scopesapi.Scope;
@@ -46,7 +47,6 @@ public class ScopesProcessor extends AbstractProcessor {
     private String applicationModuleName;
 
     //TODO Refactor the world. This code is bad.
-    //TODO Add Annotation to support ApplicationGraph
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 
@@ -117,7 +117,9 @@ public class ScopesProcessor extends AbstractProcessor {
                     createHeader(enableButterKnife, packageName, activityWriter);
                     beginType(newSourceName, activityWriter);
                     emitInjections(toInjectOnBaseClass, activityWriter);
+                    emitObjectGraphField(activityWriter);
                     emitOnCreate(enableButterKnife, fqName + "Module", activityWriter);
+                    emitOnDestroy(activityWriter);
                     emitGetModules(activityWriter);
                     if (enableButterKnife) {
                         emitGetActivity(activityWriter);
@@ -131,6 +133,18 @@ public class ScopesProcessor extends AbstractProcessor {
         }
 
         return false;
+    }
+
+    private void emitOnDestroy(JavaWriter activityWriter) throws IOException{
+        activityWriter.emitAnnotation(Override.class);
+        activityWriter.beginMethod("void", "onDestroy", EnumSet.of(Modifier.PROTECTED));
+        activityWriter.emitStatement("scopedObjectGraph = null");
+        activityWriter.emitStatement("super.onDestroy()");
+        activityWriter.endMethod();
+    }
+
+    private void emitObjectGraphField(JavaWriter activityWriter) throws IOException{
+        activityWriter.emitField(ObjectGraph.class.getSimpleName(), "scopedObjectGraph", EnumSet.of(Modifier.PRIVATE));
     }
 
     private void emitGetLayout(JavaWriter activityWriter) throws IOException {
@@ -176,12 +190,13 @@ public class ScopesProcessor extends AbstractProcessor {
         }
         if (applicationName.isEmpty()) {
             activityWriter.emitStatement(
-                    "ObjectGraph.create(new " + fqName + "()).plus(getModules()).inject(this)");
+                    "scopedObjectGraph = ObjectGraph.create(new " + fqName + "()).plus(getModules())");
         } else {
             activityWriter.emitStatement(
-                    "((" + applicationName + ")getApplication())." + applicationGraphMethodName
-                            + "().plus(new " + fqName + "())" + ".plus(getModules()).inject(this)");
+                    "scopedObjectGraph = ((" + applicationName + ")getApplication())." + applicationGraphMethodName
+                            + "().plus(new " + fqName + "())" + ".plus(getModules())");
         }
+        activityWriter.emitStatement("scopedObjectGraph.inject(this)");
         activityWriter.endMethod();
 
     }
