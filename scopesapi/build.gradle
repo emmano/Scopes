@@ -32,10 +32,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    sourceSets {
-        main.java.srcDirs += ['src/main/api']
-    }
-
 }
 
 task androidJavadocs(type: Javadoc) {
@@ -56,7 +52,7 @@ publishing {
         dist(MavenPublication) {
             groupId 'me.emmano'
             version VERSION
-            artifactId 'scopes'
+            artifactId 'me.emmano.scopes.app.scopes'
             artifact "build/outputs/aar/scopesapi-debug.aar"
             artifact androidJavadocsJar {
                 classifier 'source'
@@ -89,8 +85,8 @@ bintray {
     publish = false
     pkg {
         repo = 'emmano'
-        name = 'me.emmano.scopes'
-        desc = 'Dagger scopes done easy'
+        name = 'me.emmano.me.emmano.scopes.app.scopes'
+        desc = 'Dagger me.emmano.scopes.app.scopes done easy'
         websiteUrl = 'https://github.com/emmano/Scopes/'
         issueTrackerUrl = 'https://github.com/emmano/Scopes/issues'
         vcsUrl = 'https://github.com/emmano/Scopes.git'
@@ -100,7 +96,7 @@ bintray {
 
         version {
             name = VERSION //Bintray logical VERSION name
-            desc = 'Dagger scopes done easy'
+            desc = 'Dagger me.emmano.scopes.app.scopes done easy'
             vcsTag = VERSION
         }
     }

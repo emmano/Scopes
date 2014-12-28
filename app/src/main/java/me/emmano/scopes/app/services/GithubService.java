@@ -1,4 +1,4 @@
-package services;
+package me.emmano.scopes.app.services;
 
 import java.util.List;
 

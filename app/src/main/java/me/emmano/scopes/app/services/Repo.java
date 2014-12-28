@@ -1,4 +1,4 @@
-package services;
+package me.emmano.scopes.app.services;
 
 /**
  * Created by emmanuelortiguela on 12/27/14.

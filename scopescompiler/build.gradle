@@ -41,7 +41,7 @@ publishing {
         dist(MavenPublication) {
             groupId 'me.emmano'
             version VERSION
-            artifactId 'scopes-compiler'
+            artifactId 'me.emmano.scopes.app.scopes-compiler'
             artifact "build/libs/scopescompiler.jar"
             artifact sourcesJar {
                 classifier 'source'
@@ -74,7 +74,7 @@ bintray {
     publish = false
     pkg {
         repo = 'emmano'
-        name = 'me.emmano.scopes'
+        name = 'me.emmano.me.emmano.scopes.app.scopes'
         desc = 'Scopes compiler'
         websiteUrl = 'https://github.com/emmano/Scopes/'
         issueTrackerUrl = 'https://github.com/emmano/Scopes/issues'

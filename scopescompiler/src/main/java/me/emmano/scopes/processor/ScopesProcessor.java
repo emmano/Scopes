@@ -22,10 +22,12 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.MirroredTypesException;
 import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 import dagger.Module;
 import dagger.Provides;
+import me.emmano.scopesapi.ApplicationGraph;
 import me.emmano.scopesapi.Scope;
 import retrofit.RestAdapter;
 
@@ -34,8 +36,14 @@ import retrofit.RestAdapter;
  * Created by emmanuelortiguela on 12/26/14.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedAnnotationTypes("me.emmano.scopesapi.Scope")
+@SupportedAnnotationTypes({"me.emmano.scopesapi.Scope", "me.emmano.scopesapi.ApplicationGraph"})
 public class ScopesProcessor extends AbstractProcessor {
+
+    private String applicationGraphMethodName;
+
+    private String applicationName = "";
+
+    private String applicationModuleName;
 
     //TODO Refactor the world. This code is bad.
     //TODO Add Annotation to support ApplicationGraph
@@ -44,6 +52,29 @@ public class ScopesProcessor extends AbstractProcessor {
 
         final Set<? extends Element> annotatedElements = roundEnv
                 .getElementsAnnotatedWith(Scope.class);
+        final Set<? extends Element> applicationGraphElements = roundEnv
+                .getElementsAnnotatedWith(ApplicationGraph.class);
+
+        if (applicationGraphElements.size() > 0) {
+            final Element applicationGraphAnnotationElement = applicationGraphElements.iterator()
+                    .next();
+            applicationName = processingEnv.getElementUtils()
+                    .getPackageOf(applicationGraphAnnotationElement.getEnclosingElement())
+                    .toString() + "." + applicationGraphAnnotationElement.getEnclosingElement()
+                    .getSimpleName();
+            for (Element applicationGraphElement : applicationGraphElements) {
+                applicationGraphMethodName = applicationGraphElement.getSimpleName().toString();
+
+            }
+            try {
+                applicationGraphElements.iterator().next().getAnnotation(ApplicationGraph.class)
+                        .applicationModule();
+            } catch (MirroredTypeException ex) {
+
+                applicationModuleName = ex.getTypeMirror().toString() + ".class";
+            }
+        }
+
         Set<String> toInjectOnBaseClass = new HashSet<>();
         if (annotatedElements.size() > 0) {
             for (Element annotatedElement : annotatedElements) {
@@ -72,7 +103,7 @@ public class ScopesProcessor extends AbstractProcessor {
 
                 try {
                     final String moduleName = newSourceName + "Module";
-                    JavaWriter moduleWriter = createWriter(moduleName);
+                    JavaWriter moduleWriter = createWriter(packageName +"."+ moduleName);
                     // Create different sections of the actual compile-time generated .java source
                     createHeader(false, packageName, moduleWriter, toInjectOnBaseClass);
 
@@ -82,7 +113,7 @@ public class ScopesProcessor extends AbstractProcessor {
                     emitProviders(toInjectOnBaseClass, moduleWriter);
                     emitClose(moduleWriter);
 
-                    JavaWriter activityWriter = createWriter(newSourceName);
+                    JavaWriter activityWriter = createWriter(packageName +"."+ newSourceName);
                     createHeader(enableButterKnife, packageName, activityWriter);
                     beginType(newSourceName, activityWriter);
                     emitInjections(toInjectOnBaseClass, activityWriter);
@@ -143,8 +174,14 @@ public class ScopesProcessor extends AbstractProcessor {
             activityWriter.emitStatement("setContentView(getLayout())");
             activityWriter.emitStatement("ButterKnife.inject(getActivity())");
         }
-        activityWriter.emitStatement(
-                "ObjectGraph.create(new " + fqName + "()).plus(getModules()).inject(this)");
+        if (applicationName.isEmpty()) {
+            activityWriter.emitStatement(
+                    "ObjectGraph.create(new " + fqName + "()).plus(getModules()).inject(this)");
+        } else {
+            activityWriter.emitStatement(
+                    "((" + applicationName + ")getApplication())." + applicationGraphMethodName
+                            + "().plus(new " + fqName + "())" + ".plus(getModules()).inject(this)");
+        }
         activityWriter.endMethod();
 
     }
@@ -168,14 +205,21 @@ public class ScopesProcessor extends AbstractProcessor {
             throws IOException {
         Map<String, String> classToInject = new HashMap<>(1);
         classToInject.put("injects", fqn + ".class");
-        classToInject.put("includes", adapterModule);
+        if (!adapterModule.contains(Void.class.getSimpleName())) {
+            classToInject.put("includes", adapterModule);
+            processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
+                    "Assuming you have provided a RestAdapter on your ApplicationModule.");
+        }
+        if (!applicationName.isEmpty()) {
+            classToInject.put("addsTo", applicationModuleName);
+        }
         writer.emitAnnotation(Module.class, classToInject);
     }
 
 
     private JavaWriter createWriter(String newSourceName) throws IOException {
         final JavaFileObject sourceFile = processingEnv.getFiler()
-                .createSourceFile(newSourceName);
+                .createSourceFile("me.emmano.scopes.app.login."+newSourceName);
         return new JavaWriter(sourceFile.openWriter());
     }
 
