@@ -103,7 +103,7 @@ public class ScopesProcessor extends AbstractProcessor {
 
                 try {
                     final String moduleName = newSourceName + "Module";
-                    JavaWriter moduleWriter = createWriter("me.emmano.scopes.app", moduleName);
+                    JavaWriter moduleWriter = createWriter(moduleName);
                     // Create different sections of the actual compile-time generated .java source
                     createHeader(false, packageName, moduleWriter, toInjectOnBaseClass);
 
@@ -113,7 +113,7 @@ public class ScopesProcessor extends AbstractProcessor {
                     emitProviders(toInjectOnBaseClass, moduleWriter);
                     emitClose(moduleWriter);
 
-                    JavaWriter activityWriter = createWriter("me.emmano.scopes.app", newSourceName);
+                    JavaWriter activityWriter = createWriter(newSourceName);
                     createHeader(enableButterKnife, packageName, activityWriter);
                     beginType(newSourceName, activityWriter);
                     emitInjections(toInjectOnBaseClass, activityWriter);
@@ -217,9 +217,9 @@ public class ScopesProcessor extends AbstractProcessor {
     }
 
 
-    private JavaWriter createWriter(String packageName, String newSourceName) throws IOException {
+    private JavaWriter createWriter(String newSourceName) throws IOException {
         final JavaFileObject sourceFile = processingEnv.getFiler()
-                .createSourceFile(packageName + "." +newSourceName);
+                .createSourceFile(newSourceName);
         return new JavaWriter(sourceFile.openWriter());
     }
 

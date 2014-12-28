@@ -4,7 +4,7 @@ import android.app.Application;
 
 import dagger.ObjectGraph;
 import me.emmano.scopesapi.ApplicationGraph;
-import modules.ApplicationModule;
+import me.emmano.scopes.app.modules.ApplicationModule;
 
 /**
  * Created by emmanuelortiguela on 12/27/14.

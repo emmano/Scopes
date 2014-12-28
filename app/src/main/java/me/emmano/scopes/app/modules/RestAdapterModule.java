@@ -1,4 +1,4 @@
-package modules;
+package me.emmano.scopes.app.modules;
 
 import dagger.Module;
 import dagger.Provides;

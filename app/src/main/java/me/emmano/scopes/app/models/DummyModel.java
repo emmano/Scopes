@@ -1,4 +1,4 @@
-package models;
+package me.emmano.scopes.app.models;
 
 import javax.inject.Inject;
 

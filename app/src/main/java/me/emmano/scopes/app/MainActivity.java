@@ -10,16 +10,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.InjectView;
-import models.DummyModel;
-import modules.ActivityModule;
+import me.emmano.scopes.app.models.DummyModel;
+import me.emmano.scopes.app.modules.ActivityModule;
+import me.emmano.scopes.app.services.Repo;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import scopes.BaseLoginFlowActivity;
-import services.Repo;
 
 
-public class MainActivity extends BaseLoginFlowActivity {
+public class MainActivity extends me.emmano.scopes.app.BaseLoginFlowActivity {
 
     @InjectView(R.id.text)
     protected TextView textView;

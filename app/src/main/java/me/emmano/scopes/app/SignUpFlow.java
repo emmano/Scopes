@@ -1,8 +1,8 @@
-package scopes;
+package me.emmano.scopes.app;
 
 import me.emmano.scopesapi.Scope;
-import modules.RestAdapterModule;
-import services.GithubService;
+import me.emmano.scopes.app.modules.RestAdapterModule;
+import me.emmano.scopes.app.services.GithubService;
 
 /**
  * Created by emmanuelortiguela on 12/27/14.

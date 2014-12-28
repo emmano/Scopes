@@ -1,7 +1,7 @@
-package scopes;
+package me.emmano.scopes.app;
 
 import me.emmano.scopesapi.Scope;
-import services.GithubService;
+import me.emmano.scopes.app.services.GithubService;
 
 /**
  * Created by emmanuelortiguela on 12/26/14.
