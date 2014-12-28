@@ -14,9 +14,9 @@ public @interface Scope {
 
     String baseActivityName() default "BaseScopedActivity";
 
-    Class[] retrofitServices();
+    Class<?>[] retrofitServices();
 
-    Class restAdapterModule();
+    Class<?> restAdapterModule() default Void.class;
 
     boolean butterKnife() default false;
 

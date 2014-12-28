@@ -32,10 +32,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    sourceSets {
-        main.java.srcDirs += ['src/main/api']
-    }
-
 }
 
 task androidJavadocs(type: Javadoc) {

@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.InjectView;
+import models.DummyModel;
 import modules.ActivityModule;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -20,11 +23,15 @@ public class MainActivity extends BaseLoginFlowActivity {
 
     @InjectView(R.id.text)
     protected TextView textView;
+    
+    @Inject
+    protected DummyModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         textView.setText("Eureka!");
+        Log.e(MainActivity.class.getSimpleName(), model.toString());
         githubService.starGazers(new Callback<List<Repo>>() {
             @Override
             public void success(List<Repo> repos, Response response) {

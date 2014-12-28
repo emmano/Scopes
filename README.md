@@ -62,7 +62,7 @@ package scopes;
 
 import services.GithubService;
 import retrofit.RestAdapter;
-@dagger.Module(injects = scopes.BaseLoginFlowActivity.class, includes = modules.RestAdapterModule.class)
+@dagger.Module(injects = me.emmano.scopes.app.BaseLoginFlowActivity.class, includes = modules.RestAdapterModule.class)
 public class BaseLoginFlowActivityModule {
   @dagger.Provides
   public GithubService providesGithubService(RestAdapter adapter) {
@@ -97,7 +97,7 @@ import modules.ActivityModule;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import scopes.BaseLoginFlowActivity;
+import me.emmano.scopes.app.BaseLoginFlowActivity;
 import services.Repo;
 
 
