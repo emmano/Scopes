@@ -15,5 +15,4 @@ public class RestAdapterModule {
         return new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint("https://api.github.com/repos/emmano").build();
     }
-
 }
