@@ -1,3 +1,4 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Scopes-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1286)
 Scopes
 ======
 
