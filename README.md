@@ -4,7 +4,7 @@ Scopes
 
 ###What is Scopes?
 
-Have you ever tried to set up scoped `ObjectGraphs` with Dagger and failed miserably? Scopes a compile time annotation processor that is here to help!
+Have you ever tried to set up scoped `ObjectGraphs` with Dagger and failed miserably? Scopes is a compile time annotation processor that is here to help!
 
 ###What does Scopes do?
 It allows to separate portions of your `Application` in logical "flows". It generates "`BaseActivity`s" that contain common dependencies that other `Activities` that are part of the same flow could use.
