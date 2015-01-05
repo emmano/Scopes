@@ -17,7 +17,7 @@ Here is an example. Let's say that your `Application` has a login/signup flow (i
 It all starts by defining a class that is Annotated with `@Scope`; it does not need to be an `Activity`. If you decide not to annotate your `Activity`, the class annotated with `@Scope` has to be in the same package as the `Activity` that extends the generated `BaseActivity` (huh?!... Look at the `app` module and you will see what I mean).
 
 ```java
-@Scope(baseActivityName = "BaseLoginFlowActivity", retrofitServices = GithubService.class,
+@DaggerScope(baseActivityName = "BaseLoginFlowActivity", retrofitServices = GithubService.class,
     restAdapterModule = RestAdapterModule.class, butterKnife = true)
 public class LoginFlow {}
 ```
@@ -177,7 +177,7 @@ You can name this method whatever you like, but it must be public and reside ins
 ### TODO
 Tons of refactoring. Kittens are currently dying due to some code on the `ScopeProcessor` class.
 
-Add a parameter to `@Scope` that allows passing an `Classes[]` to be injected on the `BaseActivity`. Right now, only `Retrofit` services can be injected. You can currently add these dependencies to your version of `ActivityModule`, add the corresponding `@Injects` and `extends` your version of `MainActivity` to get regular `Objects` other than `retrofitServices` injected. It is hacky and nasty, I know.
+Add a parameter to `@DaggerScope` that allows passing an `Classes[]` to be injected on the `BaseActivity`. Right now, only `Retrofit` services can be injected. You can currently add these dependencies to your version of `ActivityModule`, add the corresponding `@Injects` and `extends` your version of `MainActivity` to get regular `Objects` other than `retrofitServices` injected. It is hacky and nasty, I know.
 
 ###Installation
 Just add the dependency to your `build.gradle`:
