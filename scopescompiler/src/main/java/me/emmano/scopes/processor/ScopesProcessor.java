@@ -29,7 +29,7 @@ import dagger.Module;
 import dagger.ObjectGraph;
 import dagger.Provides;
 import me.emmano.scopesapi.ApplicationGraph;
-import me.emmano.scopesapi.Scope;
+import me.emmano.scopesapi.DaggerScope;
 import retrofit.RestAdapter;
 
 
@@ -37,7 +37,7 @@ import retrofit.RestAdapter;
  * Created by emmanuelortiguela on 12/26/14.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedAnnotationTypes({"me.emmano.scopesapi.Scope", "me.emmano.scopesapi.ApplicationGraph"})
+@SupportedAnnotationTypes({"me.emmano.scopesapi.DaggerScope", "me.emmano.scopesapi.ApplicationGraph"})
 public class ScopesProcessor extends AbstractProcessor {
 
     private String applicationGraphMethodName;
@@ -51,7 +51,7 @@ public class ScopesProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 
         final Set<? extends Element> annotatedElements = roundEnv
-                .getElementsAnnotatedWith(Scope.class);
+                .getElementsAnnotatedWith(DaggerScope.class);
         final Set<? extends Element> applicationGraphElements = roundEnv
                 .getElementsAnnotatedWith(ApplicationGraph.class);
 
@@ -83,16 +83,17 @@ public class ScopesProcessor extends AbstractProcessor {
                 final String packageName = processingEnv.getElementUtils()
                         .getPackageOf(annotatedElement).toString();
 
-                final Scope scopeAnnotation = annotatedElement.getAnnotation(Scope.class);
+                final DaggerScope daggerScopeAnnotation
+                        = annotatedElement.getAnnotation(DaggerScope.class);
                 String restAdapterClassName = "";
-                final boolean enableButterKnife = scopeAnnotation.butterKnife();
+                final boolean enableButterKnife = daggerScopeAnnotation.butterKnife();
                 //Terrible solution; it works for now.
                 try {
-                    scopeAnnotation.retrofitServices();
+                    daggerScopeAnnotation.retrofitServices();
                 } catch (MirroredTypesException e) {
-                    newSourceName = scopeAnnotation.baseActivityName();
+                    newSourceName = daggerScopeAnnotation.baseActivityName();
                     try {
-                        restAdapterClassName = scopeAnnotation.restAdapterModule().getName();
+                        restAdapterClassName = daggerScopeAnnotation.restAdapterModule().getName();
                     } catch (MirroredTypeException ex) {
                         restAdapterClassName = ex.getTypeMirror().toString() + ".class";
                     }
@@ -201,8 +202,6 @@ public class ScopesProcessor extends AbstractProcessor {
 
     }
 
-    //TODO emit onDestroy to release ObjectGraph.
-
     private void emitProviders(Set<String> toInjectOnBaseClass, JavaWriter writer)
             throws IOException {
         for (String toInject : toInjectOnBaseClass) {
@@ -234,7 +233,7 @@ public class ScopesProcessor extends AbstractProcessor {
 
     private JavaWriter createWriter(String newSourceName) throws IOException {
         final JavaFileObject sourceFile = processingEnv.getFiler()
-                .createSourceFile("me.emmano.scopes.app.login."+newSourceName);
+                .createSourceFile(newSourceName);
         return new JavaWriter(sourceFile.openWriter());
     }
 

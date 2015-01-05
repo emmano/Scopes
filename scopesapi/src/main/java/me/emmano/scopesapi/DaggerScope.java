@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.TYPE)
-public @interface Scope {
+public @interface DaggerScope {
 
     String baseActivityName() default "BaseScopedActivity";
 
