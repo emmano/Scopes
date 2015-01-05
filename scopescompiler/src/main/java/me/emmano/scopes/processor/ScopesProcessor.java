@@ -37,7 +37,7 @@ import retrofit.RestAdapter;
  * Created by emmanuelortiguela on 12/26/14.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedAnnotationTypes({"me.emmano.scopesapi.Scope", "me.emmano.scopesapi.ApplicationGraph"})
+@SupportedAnnotationTypes({"me.emmano.scopesapi.DaggerScope", "me.emmano.scopesapi.ApplicationGraph"})
 public class ScopesProcessor extends AbstractProcessor {
 
     private String applicationGraphMethodName;
@@ -202,8 +202,6 @@ public class ScopesProcessor extends AbstractProcessor {
 
     }
 
-    //TODO emit onDestroy to release ObjectGraph.
-
     private void emitProviders(Set<String> toInjectOnBaseClass, JavaWriter writer)
             throws IOException {
         for (String toInject : toInjectOnBaseClass) {
@@ -235,7 +233,7 @@ public class ScopesProcessor extends AbstractProcessor {
 
     private JavaWriter createWriter(String newSourceName) throws IOException {
         final JavaFileObject sourceFile = processingEnv.getFiler()
-                .createSourceFile("me.emmano.scopes.app.login."+newSourceName);
+                .createSourceFile(newSourceName);
         return new JavaWriter(sourceFile.openWriter());
     }
 

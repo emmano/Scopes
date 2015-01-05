@@ -14,7 +14,7 @@ Here is an example. Let's say that your `Application` has a login/signup flow (i
 
 
 ###Ok, got it, how do I use it?
-It all starts by defining a class that is Annotated with `@Scope`; it does not need to be an `Activity`. If you decide not to annotate your `Activity`, the class annotated with `@Scope` has to be in the same package as the `Activity` that extends the generated `BaseActivity` (huh?!... Look at the `app` module and you will see what I mean).
+It all starts by defining a class that is Annotated with `@DaggerScope`; it does not need to be an `Activity`. If you decide not to annotate your `Activity`, the class annotated with `@DaggerScope` has to be in the same package as the `Activity` that extends the generated `BaseActivity` (huh?!... Look at the `app` module and you will see what I mean).
 
 ```java
 @DaggerScope(baseActivityName = "BaseLoginFlowActivity", retrofitServices = GithubService.class,
@@ -63,7 +63,7 @@ public abstract class BaseLoginFlowActivity extends Activity {
 }
 ```
 
-As you can see `Scopes` creates `BaseLoginFlowActivityModule.java` that contains `@Providers` for the `retrofitServices`. This class uses the `RestAdapter` you provided to `@Scope` to create the `retrofitServices`. If you did not provide a `RestAdapter`, `Scopes` assumes your `Application` `Class` has a module that will provide a `RestAdapter`. You will have to add `@ApplicationGraph` to a `public` method that returns the `Application`'s `ObjectGraph`. In any way, you have to supply a `RestAdapter` one way or another.  (more about `@ApplicationGraph` below)
+As you can see `Scopes` creates `BaseLoginFlowActivityModule.java` that contains `@Providers` for the `retrofitServices`. This class uses the `RestAdapter` you provided to `@DaggerScope` to create the `retrofitServices`. If you did not provide a `RestAdapter`, `Scopes` assumes your `Application` `Class` has a module that will provide a `RestAdapter`. You will have to add `@ApplicationGraph` to a `public` method that returns the `Application`'s `ObjectGraph`. In any way, you have to supply a `RestAdapter` one way or another.  (more about `@ApplicationGraph` below)
 
 ```java
 package scopes;
@@ -182,8 +182,8 @@ Add a parameter to `@DaggerScope` that allows passing an `Classes[]` to be injec
 ###Installation
 Just add the dependency to your `build.gradle`:
 ``` gradle
-compile 'me.emmano:scopes:0.1.3'
-apt 'me.emmano:scopes-compiler:0.1.3@jar'
+compile 'me.emmano:scopes:0.1.5'
+apt 'me.emmano:scopes-compiler:0.1.5@jar'
 ```
 `Scopes` requires the `apt` plugin. You can add it easily by adding this to your `build.gradle`:
 ```gradle
