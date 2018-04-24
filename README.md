@@ -182,7 +182,7 @@ Add a parameter to `@DaggerScope` that allows passing an `Classes[]` to be injec
 ###Installation
 Just add the dependency to your `build.gradle`:
 ``` gradle
-compile 'me.emmano:scopes:0.1.5'
+implementation 'me.emmano:scopes:0.1.5'
 apt 'me.emmano:scopes-compiler:0.1.5@jar'
 ```
 `Scopes` requires the `apt` plugin. You can add it easily by adding this to your `build.gradle`:
